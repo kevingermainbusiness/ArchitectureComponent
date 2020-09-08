@@ -10,14 +10,8 @@ import kotlinx.coroutines.launch
 
 class NoteViewModel constructor(application: Application) : AndroidViewModel(application) {
 
-    var noteRepository: NoteRepository = NoteRepository(application)
+    private var noteRepository: NoteRepository = NoteRepository(application)
     private var allNotes: LiveData<List<Note>> =noteRepository.getAllNotes()
-
-//    init {
-//        viewModelScope.launch {
-//            allNotes = noteRepository.getAllNotes()
-//        }
-//    }
 
     fun insert(note: Note) {
         viewModelScope.launch { noteRepository.insert(note) }

@@ -11,14 +11,19 @@ import com.kevincodes.architecturecomponent.R
 import com.kevincodes.architecturecomponent.mvvm.NoteViewModel
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var noteViewModel: NoteViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val noteViewModel = ViewModelProvider(
+
+        // Bind the ViewModel to its factory & owner
+        noteViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory(this.application)
         ).get(NoteViewModel::class.java)
-        noteViewModel.getAllTheNotes().observe(this, Observer {
+
+        // Observe the data
+        noteViewModel.getAllTheNotes().observe(this, {
             Toast.makeText(applicationContext, "onChanged", Toast.LENGTH_LONG).show()
         })
     }
