@@ -1,13 +1,11 @@
 package com.kevincodes.architecturecomponent.mvvm
 
 import android.app.Application
-import android.os.Handler
 import androidx.lifecycle.LiveData
 import com.kevincodes.architecturecomponent.data.Note
-import com.kevincodes.architecturecomponent.room.NoteDao
-import com.kevincodes.architecturecomponent.room.NoteDatabase
+import com.kevincodes.architecturecomponent.db.NoteDao
+import com.kevincodes.architecturecomponent.db.NoteDatabase
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
@@ -60,9 +58,6 @@ class NoteRepository(application: Application) {
     }
 
     fun getAllNotes(): LiveData<List<Note>> {
-        Handler().post {
-            allNotes
-        }
         return allNotes
     }
 
